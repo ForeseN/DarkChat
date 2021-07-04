@@ -1,0 +1,80 @@
+{% include 'header.html' %}
+        <!-- Custom styles for this template -->
+        <link href="static/css/signup.css" rel="stylesheet" />
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+    <body class="text-center">
+        <main class="form-signin">
+            <form method='post'>
+            <br>
+                <h2 class="login-logo">Dark Chat</h2>
+                <div class="form-floating">
+                    <input
+                        type="email"
+                        class="form-control"
+                        id="floatingInput"
+                        placeholder="Password"
+                        name='email'
+                    />
+                    <label for="floatingInput">Email Adress</label>
+                </div>
+                <div class="form-floating">
+                    <input
+                        type="string"
+                        class="form-control"
+                        id="floatingInput"
+                        placeholder="Password"
+                        name='nickname'
+                    />
+                    <label for="floatingInput">Nickname</label>
+                </div>
+                <div class="form-floating">
+                    <input
+                        type="password"
+                        class="form-control"
+                        id="floatingInput"
+                        placeholder="Password"
+                        name='password1'
+                    />
+                    <label for="floatingInput">Password</label>
+                </div>
+                <div class="form-floating">
+                    <input
+                        type="password"
+                        class="form-control"
+                        id="floatingPassword"
+                        placeholder="Password"
+                        name='password2'
+                    />
+                    <label for="floatingPassword">Confirm Password</label>
+                </div>
+
+                <!-- <div class="checkbox mb-3">
+                    <label>
+                        <input type="checkbox" value="remember-me" /> Remember
+                        me
+                    </label>
+                </div> -->
+                <br>
+                <button class="w-100 btn btn-lg btn-dark" type="submit">
+                    Register
+                </button>
+                <button type="button" class="btn btn-link sign-up">Forgot password?</button>
+                <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
+            </form>
+        </main>
+    </body>
+</html>

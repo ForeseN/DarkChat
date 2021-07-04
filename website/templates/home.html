@@ -1,0 +1,77 @@
+{% include 'header.html' %}
+<link href="static/css/mainpage_by_me.css" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Roboto&display=swap"
+    rel="stylesheet"
+/>
+<body>
+    <!-- {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %} {% for category, message in messages %} {% if
+                category == 'error' %}
+                <div
+                    class="alert alert-danger alert-dismissable fade show"
+                    role="alert"
+                >
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% else %}
+                <div
+                    class="alert alert-success alert-dismissable fade show"
+                    role="alert"
+                >
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endif %} {% endfor %} {% endif %} {% endwith %} -->
+<div class="row card-chat">
+    <div class="card border border-3"> 
+        <div class="card-body chat-box scroll"">
+            <p class="card-text">
+                {% for message in messages %}
+                {% if user.nickname == message[1] %}
+                <div class="card rounded-pill sender-text">
+                    <div class="card-body message-box">
+                        <span class='sender'><strong>{{ message[1] }}</strong></span>
+                        {{ message[0] }}
+                        <div class='datetime'>{{ message[2] }}</div>
+                    </div>
+                  </div>
+                  {% else %}
+                <div class="card rounded-pill ">
+                    <div class="card-body message-box">
+                        <span class='sender'><strong>{{ message[1] }}</strong></span>
+                        {{ message[0] }}
+                        <div class='datetime'>{{ message[2] }}</div>
+                    </div>
+                  </div>
+                  {% endif %}
+                <br />
+                {% endfor %}
+            </p>
+
+            <form class="row" action="{{ url_for('views.home') }}" method="post">
+                <div class="col-lg-11">
+                    <input
+                        type="message"
+                        class="form-control message-input"
+                        id="Message-box"
+                        placeholder="Enter a message"
+                        name='message'
+                    />
+                </div>
+                <div class="col-lg-1">
+                    <button
+                        type="submit"
+                        class="btn btn-dark mb-3 send-message-btn"
+                    >
+                        Send
+                    </button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>

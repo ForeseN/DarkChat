@@ -1,0 +1,61 @@
+html,
+body {
+    height: 100%;
+}
+
+html,
+body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    padding-top: 63px;
+    background-color: #f5f5f5;
+}
+
+.card-text {
+    font-size: 1.3rem;
+    font-family: "Roboto", sans-serif;
+}
+
+.card-chat {
+    padding: 5% 15%;
+}
+
+/* .message-input {
+    width: 100%;
+} */
+
+.send-message-btn {
+    width: 100%;
+}
+
+.message-box {
+    padding-left: 25px;
+}
+
+.alignleft {
+    float: left;
+}
+.alignright {
+    float: right;
+}
+
+.sender {
+    padding-right: 50px;
+}
+
+.datetime {
+    padding-top: 15px;
+}
+
+.sender-text {
+    background-color: #e6e6e6;
+}
+
+.scroll {
+    max-height: 650px;
+    overflow-y: auto;
+}

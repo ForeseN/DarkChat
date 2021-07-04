@@ -1,0 +1,25 @@
+.navbar-brand {
+    font-family: "Ubuntu";
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.nav-item {
+    padding: 0 18px;
+}
+
+.nav-link {
+    font-size: 1.3rem;
+    font-family: "Montserrat";
+}
+
+.darkchat-padding {
+    padding-left: 15px;
+}
+
+.welcome-text {
+    color: white;
+    padding-left: 25px;
+    font-family: "Ubuntu";
+}
+
