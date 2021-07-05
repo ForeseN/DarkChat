@@ -27,12 +27,12 @@
                 </div>
                 {% endif %} {% endfor %} {% endif %} {% endwith %} -->
 <div class="row card-chat">
-    <div class="card border border-3"> 
+    <div class="card border border-3 border-bottom-0 rounded-top"> 
         <div class="card-body chat-box scroll"">
             <p class="card-text">
                 {% for message in messages %}
                 {% if user.nickname == message[1] %}
-                <div class="card rounded-pill sender-text">
+                <div class="card rounded-3 sender-text w-50">
                     <div class="card-body message-box">
                         <span class='sender'><strong>{{ message[1] }}</strong></span>
                         {{ message[0] }}
@@ -40,7 +40,7 @@
                     </div>
                   </div>
                   {% else %}
-                <div class="card rounded-pill ">
+                <div class="card rounded-3 w-50 ">
                     <div class="card-body message-box">
                         <span class='sender'><strong>{{ message[1] }}</strong></span>
                         {{ message[0] }}
@@ -52,26 +52,31 @@
                 {% endfor %}
             </p>
 
-            <form class="row" action="{{ url_for('views.home') }}" method="post">
-                <div class="col-lg-11">
-                    <input
-                        type="message"
-                        class="form-control message-input"
-                        id="Message-box"
-                        placeholder="Enter a message"
-                        name='message'
-                    />
-                </div>
-                <div class="col-lg-1">
-                    <button
-                        type="submit"
-                        class="btn btn-dark mb-3 send-message-btn"
-                    >
-                        Send
-                    </button>
-            </div>
-            </form>
+            
         </div>
+    </div>
+    <div class="card border-3 border-top-0 rounded-bottom send-msg-form">
+        <form class="row form-button" action="{{ url_for('views.home') }}" method="post">
+            <div class="col-lg-11">
+                <input
+                    type="message"
+                    class="form-control message-input rounded-pill"
+                    id="Message-box"
+                    placeholder="Type a message"
+                    name='message'
+                />
+            </div>
+            <div class="col-lg-1">
+                <button
+                    type="submit"
+                    class="btn btn-outline-dark mb-3 send-message-btn"
+                >
+                    <img src="static\images\send.png"
+                    width="25"
+                    height="=25">
+                </button>
+        </div>
+        </form>
     </div>
 </div>
 </body>
