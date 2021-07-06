@@ -44,11 +44,11 @@ body {
 }
 
 .sender {
-    padding-right: 50px;
+    padding-bottom: 10px;
 }
 
 .datetime {
-    padding-top: 15px;
+    float: right;
 }
 
 .sender-text {
@@ -60,10 +60,13 @@ body {
     overflow-y: auto;
 }
 
-/* .send-msg-form {
-    padding-top: 15px;
-} */
-
 .form-button {
     padding-top: 10px;
+}
+.message-content {
+    display: inline;
+}
+
+.datetime-you {
+    float: left;
 }

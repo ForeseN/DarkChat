@@ -1,0 +1,72 @@
+html,
+body {
+    height: 100%;
+}
+
+html,
+body {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+body {
+    align-items: center;
+    padding-top: 62px;
+    padding-bottom: 40px;
+    background-color: #f5f5f5;
+}
+
+.form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    padding-top: 150px;
+    margin: auto;
+}
+
+.form-signin .checkbox {
+    font-weight: 400;
+}
+
+.form-signin .form-floating:focus-within {
+    z-index: 2;
+}
+
+.form-signin input[type="email"] {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.form-signin input {
+    margin-bottom: 10px;
+}
+
+.login-logo {
+    /* padding: 15% 7%; */
+    font-size: 3.5rem;
+}
+
+.sign-up {
+    padding: 5%;
+}
+
+.nickname-form {
+    padding-bottom: 15px;
+}
+
+.what-is-this-page {
+    padding-bottom: 5%;
+    padding-top: 5%;
+}
+
+/* .form-signin input[type="contact-msg"] { */
+/* border-top-left-radius: 0;
+    border-top-right-radius: 0; */
+/* height: 200px; */
+/* } */

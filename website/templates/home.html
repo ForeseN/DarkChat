@@ -38,17 +38,17 @@
                     </div>
                 <div class="card rounded-3 sender-text w-50 col-6 text-end">
                     <div class="card-body message-box">
-                        <span class='sender'>{{ message[0] }}</span>
-                        <strong>{{ message[1] }}</strong>
-                        <div class='datetime'>{{ message[2] }}</div>
+                        <div class='sender'><strong>{{ message[1] }}</strong></div>
+                        <span class='datetime-you'>{{ message[2] }}</span>
+                        <span class='message-content-you'>{{ message[0] }}</span>
                     </div>
                   </div>
                 </div>
                   {% else %}
-                <div class="card rounded-3 w-50 ">
+                <div class="card rounded-3 w-50 card-content">
                     <div class="card-body message-box">
-                        <span class='sender'><strong>{{ message[1] }}</strong></span>
-                        <div class='message-content'>{{ message[0] }}</div>
+                        <div class='sender'><strong>{{ message[1] }}</strong></div>
+                        <span class='message-content'>{{ message[0] }}</span>
                         <span class='datetime'>{{ message[2] }}</span>
                     </div>
                   </div>

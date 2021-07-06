@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request
 from flask_login import login_required, current_user
 import datetime
+from flask_mail import Mail, Message
 views = Blueprint('views', __name__)
 
 messages = [['hello', 'test', '21:29'], [
@@ -19,3 +20,11 @@ def home():
             messages.append(
                 [message, current_user.nickname, current_time_formatted])
     return render_template('home.html', user=current_user, messages=messages)
+
+
+@views.route('/contact', methods=['GET', 'POST'])
+def contact():
+    if request.method == 'POST':
+        contact_message = request.form.get('contact-msg')
+
+    return render_template('contact.html', user=current_user)

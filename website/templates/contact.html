@@ -1,6 +1,6 @@
 {% include 'header.html' %}
         <!-- Custom styles for this template -->
-        <link href="static/css/signup.css" rel="stylesheet" />
+        <link href="static/css/contact.css" rel="stylesheet" />
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -20,13 +20,13 @@
         <main class="form-signin">
             <form method='post'>
                 <h2 class="login-logo">Dark Chat</h2>
-                <h4 class='what-is-this-page'>Register</h4>
+                <h4 class='what-is-this-page'>Contact me</h4>
                 <div class="form-floating">
                     <input
                         type="email"
                         class="form-control"
                         id="floatingInput"
-                        placeholder="Password"
+                        placeholder="Email@Email.Com"
                         name='email'
                     />
                     <label for="floatingInput">Email Adress</label>
@@ -36,31 +36,17 @@
                         type="string"
                         class="form-control"
                         id="floatingInput"
-                        placeholder="Password"
-                        name='nickname'
+                        placeholder="David Beckham"
+                        name='fullname'
                     />
-                    <label for="floatingInput">Nickname</label>
+                    <label for="floatingInput">Fullname</label>
                 </div>
-                <div class="form-floating">
-                    <input
-                        type="password"
-                        class="form-control"
-                        id="floatingInput"
-                        placeholder="Password"
-                        name='password1'
-                    />
-                    <label for="floatingInput">Password</label>
-                </div>
-                <div class="form-floating">
-                    <input
-                        type="password"
-                        class="form-control"
-                        id="floatingPassword"
-                        placeholder="Password"
-                        name='password2'
-                    />
-                    <label for="floatingPassword">Confirm Password</label>
-                </div>
+                <div class="mb-3">
+                    <!-- <label for="exampleFormControlTextarea1" class="form-label">Enter your message</label> -->
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="8" placeholder="Enter your message" name='contact-msg'></textarea>
+                  </div>
+
+                
 
                 <!-- <div class="checkbox mb-3">
                     <label>
@@ -70,9 +56,8 @@
                 </div> -->
                 <br>
                 <button class="w-100 btn btn-lg btn-dark" type="submit">
-                    Register
+                    Send
                 </button>
-                <a type="button" class="btn btn-link sign-up" href='login'>Already have an account? Sign in</a>
                 <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
             </form>
         </main>
