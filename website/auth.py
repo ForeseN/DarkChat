@@ -16,13 +16,13 @@ def login():
         user = User.query.filter_by(email=email).first()
         if user:
             if check_password_hash(user.password, password):
-                flash('Logged in Successfuly', category='success')
+                flash('Logged in Successfuly!', category='success')
                 login_user(user)
                 return redirect(url_for('views.home'))
             else:
-                flash('The password is incorrect', category='error')
+                flash('The password is incorrect.', category='error')
         else:
-            flash('Email does not exist', category='error')
+            flash('Email does not exist.', category='error')
 
     return render_template('login.html', user=current_user)
 
@@ -31,7 +31,7 @@ def login():
 @login_required
 def logout():
     logout_user()
-    flash('Logout Successfuly', category='success')
+    flash('Logout Successfuly!', category='success')
     return redirect(url_for('auth.login'))
 
 
@@ -48,11 +48,11 @@ def sign_up():
             flash('Email already exists', category='error')
 
         elif len(nickname) < 2:
-            flash('Nickname must be greater than 2 characters', category='error')
+            flash('Nickname must be greater than 2 characters.', category='error')
         elif password1 != password2:
-            flash('Passwords must match', category='error')
+            flash('Passwords must match.', category='error')
         elif len(password1) < 5:
-            flash('Password should contain at least 5 characters', category='error')
+            flash('Password should contain at least 5 characters.', category='error')
         else:
             new_user = User(email=email, nickname=nickname, password=generate_password_hash(
                 password1, method='sha256'))

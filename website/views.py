@@ -1,7 +1,7 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, current_app, flash
 from flask_login import login_required, current_user
-import datetime
 from flask_mail import Mail, Message
+import datetime
 views = Blueprint('views', __name__)
 
 messages = [['hello', 'test', '21:29'], [
@@ -25,6 +25,19 @@ def home():
 @views.route('/contact', methods=['GET', 'POST'])
 def contact():
     if request.method == 'POST':
+        fullname = request.form.get('fullname')
+        email = request.form.get('email')
         contact_message = request.form.get('contact-msg')
+        if fullname == '' or email == '' or contact_message == '':
+            flash('Please make sure you haven\'t left any empty fields.',
+                  category='error')
+        else:
+            title = f'{email} {fullname}'
+            msg = Message(title, sender='yagosik4@gmail.com',
+                          recipients=['yagosik4@gmail.com'])
+            msg.body = contact_message
+            mail = Mail(current_app)
+            mail.send(msg)
+            flash('We appreciate you contacting DarkChat. One of our colleagues will get back in touch with you soon!', category='success')
 
     return render_template('contact.html', user=current_user)
