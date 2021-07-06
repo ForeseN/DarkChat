@@ -32,19 +32,24 @@
             <p class="card-text">
                 {% for message in messages %}
                 {% if user.nickname == message[1] %}
-                <div class="card rounded-3 sender-text w-50">
+                <!-- added row and col-6 so sender text would be right aliigned -->
+                <div class='row'>
+                    <div class='col-6'>
+                    </div>
+                <div class="card rounded-3 sender-text w-50 col-6 text-end">
                     <div class="card-body message-box">
-                        <span class='sender'><strong>{{ message[1] }}</strong></span>
-                        {{ message[0] }}
+                        <span class='sender'>{{ message[0] }}</span>
+                        <strong>{{ message[1] }}</strong>
                         <div class='datetime'>{{ message[2] }}</div>
                     </div>
                   </div>
+                </div>
                   {% else %}
                 <div class="card rounded-3 w-50 ">
                     <div class="card-body message-box">
                         <span class='sender'><strong>{{ message[1] }}</strong></span>
-                        {{ message[0] }}
-                        <div class='datetime'>{{ message[2] }}</div>
+                        <div class='message-content'>{{ message[0] }}</div>
+                        <span class='datetime'>{{ message[2] }}</span>
                     </div>
                   </div>
                   {% endif %}

@@ -11,7 +11,7 @@ body {
 }
 
 body {
-    padding-top: 63px;
+    padding-top: 61px;
     background-color: #f5f5f5;
 }
 
@@ -21,7 +21,7 @@ body {
 }
 
 .card-chat {
-    padding: 3% 15%;
+    padding: 4% 15%;
 }
 
 /* .message-input {
