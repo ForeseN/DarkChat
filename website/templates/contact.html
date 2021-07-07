@@ -20,7 +20,7 @@
         <main class="form-signin">
             <form method='post'>
                 <h2 class="login-logo">Dark Chat</h2>
-                <h4 class='what-is-this-page'>Contact me</h4>
+                <h4 class='what-is-this-page'>Contact Us</h4>
                 <div class="form-floating">
                     <input
                         type="email"
@@ -29,7 +29,7 @@
                         placeholder="Email@Email.Com"
                         name='email'
                     />
-                    <label for="floatingInput">Email Adress</label>
+                    <label for="floatingInput">Email Address</label>
                 </div>
                 <div class="form-floating">
                     <input
@@ -45,7 +45,9 @@
                     <!-- <label for="exampleFormControlTextarea1" class="form-label">Enter your message</label> -->
                     <textarea class="form-control" id="exampleFormControlTextarea1" rows="8" placeholder="Enter your message" name='contact-msg'></textarea>
                   </div>
-
+                  <div>
+                    {{ recaptcha }}
+                </div>
                 
 
                 <!-- <div class="checkbox mb-3">
@@ -56,7 +58,7 @@
                 </div> -->
                 <br>
                 <button class="w-100 btn btn-lg btn-dark" type="submit">
-                    Send
+                    Contact Us
                 </button>
                 <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
             </form>

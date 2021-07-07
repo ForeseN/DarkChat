@@ -2,10 +2,18 @@ from flask import Blueprint, render_template, request, current_app, flash
 from flask_login import login_required, current_user
 from flask_mail import Mail, Message
 import datetime
+from flask_recaptcha import ReCaptcha
+
+from . import recaptcha
 views = Blueprint('views', __name__)
 
 messages = [['hello', 'test', '21:29'], [
     'hey there', 'test', '21:30'], ['yeah?', 'test', '21:31']]
+
+
+# recaptcha = ReCaptcha(app=current_app)
+# recaptcha = ReCaptcha()
+# recaptcha.init_app(current_app)
 
 
 @views.route('/', methods=['GET', 'POST'])
@@ -31,6 +39,8 @@ def contact():
         if fullname == '' or email == '' or contact_message == '':
             flash('Please make sure you haven\'t left any empty fields.',
                   category='error')
+        elif not recaptcha.verify():
+            flash('Recaptcha error.', category='error')
         else:
             title = f'{email} {fullname}'
             msg = Message(title, sender='yagosik4@gmail.com',

@@ -3,10 +3,11 @@ from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_login import LoginManager
 from flask_mail import Mail, Message
-
+from flask_recaptcha import ReCaptcha
 
 db = SQLAlchemy()
 DB_NAME = 'database.db'
+recaptcha = ReCaptcha()
 
 
 def create_app():
@@ -22,8 +23,15 @@ def create_app():
     app.config['MAIL_USE_TLS'] = False
     app.config['MAIL_USE_SSL'] = True
 
+    app.config.update(dict(
+        RECAPTCHA_ENABLED=True,
+        RECAPTCHA_SITE_KEY="6Lcr7n4bAAAAAGTb4eEcLKzYBt-jtMxPTHtdnorv",  #
+        RECAPTCHA_SECRET_KEY="6Lcr7n4bAAAAAFtVS5AY73h36D0UrlHwFjT3C8aG",
+    ))
+
+    recaptcha.init_app(app)
+
     db.init_app(app)
-    
 
     from .views import views
     from .auth import auth

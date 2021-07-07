@@ -1,3 +1,4 @@
+from . import recaptcha
 from flask import Blueprint, render_template, request, flash, redirect, url_for, current_app
 from .models import User
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -58,6 +59,8 @@ def sign_up():
             flash('Password should contain at least 5 characters.', category='error')
         elif i_agree != 'accept':
             flash('You must accept terms and conditions!', category='error')
+        elif not recaptcha.verify():
+            flash('Recaptcha error.', category='error')
         else:
             new_user = User(email=email, nickname=nickname, password=generate_password_hash(
                 password1, method='sha256'))
