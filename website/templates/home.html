@@ -6,34 +6,58 @@
     href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Roboto&display=swap"
     rel="stylesheet"
 />
+<script type="text/javascript">
+    $(document).ready(function () {
+        scroll_down();
+        // var socket = io.connect('http://127.0.0.1:5000');
+        var socket = io.connect("http://10.100.102.27:5000/");
+
+        socket.on("message", function (msg) {
+            if (msg[1] == '{{ user.nickname }}') {
+                $("#messages").append("<div class='row add-padding-right'>" +
+                    "<div class='col-6'>"+
+                    "</div>"+
+                "<div class='card rounded-3 sender-text w-50 col-6 text-end'>" +
+                    "<div class='card-body message-box'>"+
+                        "<div class='sender'><strong>" +msg[1]+ "</strong></div>"+
+                        "<span class='datetime-you'>"+msg[2]+"</span>"+
+                        "<span class='message-content-you'>"+ msg[0]+"</span>"+
+                    "</div>"+
+                  "</div>"+
+                    "</div>"+
+                    "<br />");
+            } else {
+                $("#messages").append("<div class='card rounded-3 w-50 card-content'>" +
+                    "<div class='card-body message-box'>" +
+                    "<div class='sender'><strong>"+msg[1]+"</strong></div>" + 
+                    "<div class='message-content'>" + msg[0] + "</div>" +
+                    "<span class='datetime'>" +msg[2]+ "</span>" +
+                    "</div>" + 
+                    "</div>" +
+                    "<br />");
+            }
+            scroll_down();
+            
+            console.log("Received message");
+        });
+
+        $("#sendbutton").on("click", function () {
+            socket.send($("#Message-box").val());
+            $("#Message-box").val("");
+        });
+    });
+</script>
 <body>
-    <!-- {% with messages = get_flashed_messages(with_categories=true) %}
-                {% if messages %} {% for category, message in messages %} {% if
-                category == 'error' %}
-                <div
-                    class="alert alert-danger alert-dismissable fade show"
-                    role="alert"
-                >
-                    {{ message }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                {% else %}
-                <div
-                    class="alert alert-success alert-dismissable fade show"
-                    role="alert"
-                >
-                    {{ message }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                {% endif %} {% endfor %} {% endif %} {% endwith %} -->
 <div class="row card-chat">
-    <div class="card border border-3 border-bottom-0 rounded-top"> 
-        <div class="card-body chat-box scroll"">
+    <div class="card border border-3 border-bottom-0 rounded-top whole-chat"> 
+        <div class="card-body chat-box scroll sc3" id='chat-box'>
+            <div id='refresh-text'>
             <p class="card-text">
+                <div id='messages'>
                 {% for message in messages %}
                 {% if user.nickname == message[1] %}
                 <!-- added row and col-6 so sender text would be right aliigned -->
-                <div class='row'>
+                <div class='row add-padding-right'>
                     <div class='col-6'>
                     </div>
                 <div class="card rounded-3 sender-text w-50 col-6 text-end">
@@ -52,17 +76,21 @@
                         <span class='datetime'>{{ message[2] }}</span>
                     </div>
                   </div>
+
                   {% endif %}
                 <br />
                 {% endfor %}
+            </div>
             </p>
+        </div>
 
             
         </div>
     </div>
     <div class="card border-3 border-top-0 rounded-bottom send-msg-form">
-        <form class="row form-button" action="{{ url_for('views.home') }}" method="post">
-            <div class="col-lg-11">
+        <!-- <form class="row form-button" action="{{ url_for('views.home') }}" method="post"> -->
+        <form class="row form-button" onsubmit="return false">
+            <div class="col-lg-11"> 
                 <input
                     type="message"
                     class="form-control message-input rounded-pill"
@@ -74,6 +102,7 @@
             <div class="col-lg-1">
                 <button
                     type="submit"
+                    id='sendbutton'
                     class="btn btn-outline-dark mb-3 send-message-btn"
                 >
                     <img src="static\images\send.png"
@@ -84,4 +113,10 @@
         </form>
     </div>
 </div>
+<script>
+    function scroll_down() {
+        var objDiv = document.getElementById('chat-box');
+        objDiv.scrollTop = objDiv.scrollHeight;
+    }
+</script>
 </body>

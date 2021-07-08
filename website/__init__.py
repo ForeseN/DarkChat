@@ -4,10 +4,14 @@ from os import path
 from flask_login import LoginManager
 from flask_mail import Mail, Message
 from flask_recaptcha import ReCaptcha
+from flask_socketio import SocketIO, send
+from flask_moment import Moment
 
 db = SQLAlchemy()
 DB_NAME = 'database.db'
 recaptcha = ReCaptcha()
+socketio = SocketIO()
+moment = Moment()
 
 
 def create_app():
@@ -33,6 +37,8 @@ def create_app():
 
     db.init_app(app)
 
+    moment.init_app(app)
+
     from .views import views
     from .auth import auth
 
@@ -50,6 +56,8 @@ def create_app():
     @login_manager.user_loader
     def load_user(id):
         return User.query.get(int(id))
+
+    socketio.init_app(app)
 
     return app
 
