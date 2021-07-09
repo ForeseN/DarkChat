@@ -5,7 +5,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 from flask_login import login_user, login_required, logout_user, current_user
 from flask_mail import Mail, Message
-from flask_socketio import send
+from flask_socketio import send, emit
+from website import socketio, messages
 
 auth = Blueprint('auth', __name__)
 
@@ -19,10 +20,15 @@ def login():
         user = User.query.filter_by(email=email).first()
         if user:
             if check_password_hash(user.password, password):
-                flash('Logged in Successfuly!', category='success')
+                # flash('Logged in Successfuly!', category='success')
                 login_user(user)
-                # send(
-                #     [[], f'{current_user.nickname} has Entered the chat!'], broadcast=True)
+                flash('It is our great pleasure to have you on board!',
+                      category='toast')
+                socketio.send(
+                    ['CONNECTION_MESSAGE', f'{user.nickname} has just connected to the DarkChat!'], broadcast=True)
+                messages.append(
+                    ['CONNECTION_MESSAGE', f'{user.nickname} has just connected to the DarkChat!'])
+
                 return redirect(url_for('views.home'))
             else:
                 flash('The password is incorrect.', category='error')
@@ -35,6 +41,10 @@ def login():
 @auth.route('/logout')
 @login_required
 def logout():
+    socketio.send(
+        ['CONNECTION_MESSAGE', f'{current_user.nickname} has left the DarkChat!'], broadcast=True)
+    messages.append(
+        ['CONNECTION_MESSAGE', f'{current_user.nickname} has left the DarkChat!'])
     logout_user()
     flash('Logout Successfuly!', category='success')
     return redirect(url_for('auth.login'))
@@ -78,6 +88,8 @@ def sign_up():
             msg.body = message_body
             mail = Mail(current_app)
             mail.send(msg)
+            flash(
+                'It is our great pleasure to have you on board!', category='toast')
             return redirect(url_for('views.home'))
 
     return render_template('signup.html', user=current_user)

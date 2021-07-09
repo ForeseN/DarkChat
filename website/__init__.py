@@ -13,6 +13,8 @@ recaptcha = ReCaptcha()
 socketio = SocketIO()
 moment = Moment()
 
+messages = []
+
 
 def create_app():
     app = Flask(__name__)

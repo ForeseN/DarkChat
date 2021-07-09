@@ -98,3 +98,7 @@ body {
 .whole-chat {
     margin-bottom: -22px;
 }
+
+.toast-top {
+    padding-top: 20px;
+}

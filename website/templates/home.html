@@ -12,12 +12,21 @@
         // var socket = io.connect('http://127.0.0.1:5000');
         var socket = io.connect("http://10.100.102.27:5000/");
 
-        socket.on("connect", function () {
-            socket.send("CONNECTION_MESSAGE");
-        });
+        //socket.on("connect", function () {
+            //socket.send("CONNECTION_MESSAGE");
+            // show_toast('liveToast')
+        //});
 
         socket.on("message", function (msg) {
-            if (msg[1] == '{{ user.nickname }}') {
+            if (msg[0] == 'CONNECTION_MESSAGE') {
+                $("#messages").append("<div class='card rounded-3 w-100 card-content'>" +
+                    "<div class='card-body message-box' style='text-align: center;>" +
+                        "<div class='sender' style='text-align: center;'><strong>"+msg[1]+"</strong></div>" +
+                        "</div>" +
+                        "</div>" +
+                        "<br />")
+            }
+            else if (msg[1] == '{{ user.nickname }}') {
                 $("#messages").append("<div class='row add-padding-right'>" +
                     "<div class='col-6'>"+
                     "</div>"+
@@ -59,8 +68,15 @@
             <p class="card-text">
                 <div id='messages'>
                 {% for message in messages %}
-                {% if user.nickname == message[1] %}
+                {% if message[0] == 'CONNECTION_MESSAGE' %}
                 <!-- added row and col-6 so sender text would be right aliigned -->
+                <div class='card rounded-3 w-100 card-content'>
+                    <div class='card-body message-box' style='text-align: center;'>
+                        <div class='sender' style='text-align: center;'><strong>{{message[1]}}</strong></div>
+                        </div>
+                        </div>
+                        <br />
+                {% elif user.nickname == message[1] %}
                 <div class='row add-padding-right'>
                     <div class='col-6'>
                     </div>
@@ -72,6 +88,7 @@
                     </div>
                   </div>
                 </div>
+                
                   {% else %}
                 <div class="card rounded-3 w-50 card-content">
                     <div class="card-body message-box">
@@ -123,4 +140,40 @@
         objDiv.scrollTop = objDiv.scrollHeight;
     }
 </script>
+{% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %} {% for category, message in messages %} {% if
+                category == 'toast'%}
+                <div
+                    class="position-fixed bottom-0 start-0 p-4"
+                    style="z-index: 11"
+                >
+                    <div
+                        id="liveToast"
+                        class="toast"
+                        role="alert"
+                        aria-live="assertive"
+                        aria-atomic="true"
+                    >
+                        <div class="toast-header">
+                            <strong class="me-auto"
+                                >Welcome {{user.nickname}}!</strong
+                            >
+                            <small>Now</small>
+                            <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="toast"
+                                aria-label="Close"
+                            ></button>
+                        </div>
+                        <div class="toast-body">
+                            {{message}}
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    show_toast("liveToast");
+                </script>
+                {% endif %} {% endfor %} {% endif %} {% endwith %}
+
 </body>
