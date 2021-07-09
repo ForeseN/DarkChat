@@ -12,6 +12,10 @@
         // var socket = io.connect('http://127.0.0.1:5000');
         var socket = io.connect("http://10.100.102.27:5000/");
 
+        socket.on("connect", function () {
+            socket.send("CONNECTION_MESSAGE");
+        });
+
         socket.on("message", function (msg) {
             if (msg[1] == '{{ user.nickname }}') {
                 $("#messages").append("<div class='row add-padding-right'>" +

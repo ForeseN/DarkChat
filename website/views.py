@@ -18,12 +18,16 @@ messages = []
 def handleMessage(msg):
     global messages
     print('Message: ' + msg)
-    current_time = datetime.datetime.now()
-    current_time_formatted = current_time.strftime("%H:%M")
-    messages.append([msg, current_user.nickname, current_time_formatted])
-    send([msg, current_user.nickname, current_time_formatted], broadcast=True)
-    if msg == 'admin_reset':
-        messages = []
+    if msg == 'CONNECTION_MESSAGE':
+        send(
+            [None, f'{current_user.nickname} has just connected to the DarkChat!'])
+    else:
+        current_time = datetime.datetime.now()
+        current_time_formatted = current_time.strftime("%H:%M")
+        messages.append([msg, current_user.nickname, current_time_formatted])
+        send([msg, current_user.nickname, current_time_formatted], broadcast=True)
+        if msg == 'admin_reset':
+            messages = []
 
 
 @views.route('/', methods=['GET'])

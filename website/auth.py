@@ -5,6 +5,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 from flask_login import login_user, login_required, logout_user, current_user
 from flask_mail import Mail, Message
+from flask_socketio import send
 
 auth = Blueprint('auth', __name__)
 
@@ -20,6 +21,8 @@ def login():
             if check_password_hash(user.password, password):
                 flash('Logged in Successfuly!', category='success')
                 login_user(user)
+                # send(
+                #     [[], f'{current_user.nickname} has Entered the chat!'], broadcast=True)
                 return redirect(url_for('views.home'))
             else:
                 flash('The password is incorrect.', category='error')
