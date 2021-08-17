@@ -13,6 +13,7 @@ auth = Blueprint('auth', __name__)
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
+    # LOGIN METHOD, VALIDATES PASS AND EMAIL
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
@@ -20,7 +21,7 @@ def login():
         user = User.query.filter_by(email=email).first()
         if user:
             if check_password_hash(user.password, password):
-                # flash('Logged in Successfuly!', category='success')
+                # LOGIN SUCCESS
                 login_user(user)
                 flash('It is our great pleasure to have you on board!',
                       category='toast')
@@ -58,9 +59,10 @@ def sign_up():
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
         i_agree = request.form.get('i-agree')
-        print(i_agree)
 
         user = User.query.filter_by(email=email).first()
+        
+        # VALIDATION
         if user:
             flash('Email already exists', category='error')
 
@@ -75,6 +77,7 @@ def sign_up():
         elif not recaptcha.verify():
             flash('Recaptcha error.', category='error')
         else:
+            # NEW USER! SENDS A WELCOME EMAIL ASWELL
             new_user = User(email=email, nickname=nickname, password=generate_password_hash(
                 password1, method='sha256'))
             db.session.add(new_user)

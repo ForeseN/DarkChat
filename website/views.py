@@ -11,16 +11,15 @@ from . import recaptcha
 views = Blueprint('views', __name__)
 
 
+# MESSAGE RECIEVED BACKEND
 @socketio.on('message')
 def handleMessage(msg):
     global messages
-    print('Message: ' + msg)
-    # if msg == 'CONNECTION_MESSAGE':
-    #     messages.append(
-    #         ['CONNECTION_MESSAGE', f'{current_user.nickname} has just connected to the DarkChat!'])
+    # DEBUGGING & MESSAGE RESET
     if msg == 'admin_reset':
         messages = []
     else:
+        # APPENDS TO MESSAGES & SENDS TO SOCKETIO
         current_time = datetime.datetime.now()
         current_time_formatted = current_time.strftime("%H:%M")
         messages.append([msg, current_user.nickname, current_time_formatted])
@@ -39,12 +38,14 @@ def contact():
         fullname = request.form.get('fullname')
         email = request.form.get('email')
         contact_message = request.form.get('contact-msg')
+        # VALIDATION + RECAPTCHA
         if fullname == '' or email == '' or contact_message == '':
             flash('Please make sure you haven\'t left any empty fields.',
                   category='error')
         elif not recaptcha.verify():
             flash('Recaptcha error.', category='error')
         else:
+            # SUCCESS, SENDS AN EMAIL FOR ME
             title = f'{email} {fullname}'
             msg = Message(title, sender='yagosik4@gmail.com',
                           recipients=['yagosik4@gmail.com'])
