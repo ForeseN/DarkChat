@@ -61,7 +61,7 @@ def sign_up():
         i_agree = request.form.get('i-agree')
 
         user = User.query.filter_by(email=email).first()
-        
+
         # VALIDATION
         if user:
             flash('Email already exists', category='error')
@@ -74,8 +74,8 @@ def sign_up():
             flash('Password should contain at least 5 characters.', category='error')
         elif i_agree != 'accept':
             flash('You must accept terms and conditions!', category='error')
-        elif not recaptcha.verify():
-            flash('Recaptcha error.', category='error')
+        # elif not recaptcha.verify():
+        #     flash('Recaptcha error.', category='error')
         else:
             # NEW USER! SENDS A WELCOME EMAIL ASWELL
             new_user = User(email=email, nickname=nickname, password=generate_password_hash(
